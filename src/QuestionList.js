@@ -6,7 +6,8 @@ const QuestionList = () => {
     id: 1,
     question: "What is the capital city of France?",
     answer: "Paris",
-    options: ["London", "Paris", "New-York", "Berlin"],
+    incorrect_answers: ["London", "Paris", "New-York", "Berlin"],
+    correct_answer: "Whatever",
   }
   const [questions, setQuestions] = useState(initialQuestions)
 
@@ -24,7 +25,7 @@ const QuestionList = () => {
     fetchData()
   }, [])
 
-  console.log("questions", questions)
+  //console.log("questions", questions)
 
   return (
     <div>
