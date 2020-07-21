@@ -1,5 +1,5 @@
 import React from "react"
-import Button from "./Button"
+// import Button from "./Button"
 
 function shuffle(array) {
   var currentIndex = array.length,
@@ -21,12 +21,14 @@ function shuffle(array) {
   return array
 }
 
-function validateAnswer(formElements, correctAnswer) {
-  console.log(formElements, correctAnswer)
+function handleSubmit(event) {
+  event.preventDefault()
 }
 
-function updateSelectedAnswer() {
-  console.log("this", this)
+function validateAnswer(selectedAnswer, correctAnswer) {
+  console.log(selectedAnswer, correctAnswer)
+  console.log(selectedAnswer == correctAnswer)
+  return selectedAnswer == correctAnswer
 }
 
 const Question = ({ questions }) => {
@@ -38,10 +40,11 @@ const Question = ({ questions }) => {
   shuffle(answers)
 
   let answerIsCorrect = false
+  let selectedAnswer = ""
 
   return (
     <div className={answerIsCorrect ? "right" : "wrong"}>
-      <form>
+      <form onSubmit={(event) => handleSubmit(event)}>
         <fieldset>
           <p>{questions.question}</p>
 
@@ -54,17 +57,28 @@ const Question = ({ questions }) => {
                   id={timestamp}
                   name="answerToQuestion"
                   value={answer}
-                  onChange={updateSelectedAnswer()}
+                  onChange={(e) => (selectedAnswer = e.target.value)}
                 />
                 <label htmlFor={timestamp}>{answer}</label>
                 <br></br>
               </>
             )
           })}
-          <Button
-            className="btn"
-            onClick={validateAnswer("placeholder", questions["correct_answer"])}
-          />
+          <button
+            type="submit"
+            className={answerIsCorrect ? "right" : "wrong"}
+            onClick={() => {
+              answerIsCorrect = validateAnswer(selectedAnswer, questions["correct_answer"])
+            }}
+          >
+            Submit
+          </button>
+          {/* <Button
+            onClick={
+              //(answerIsCorrect = validateAnswer(selectedAnswer, questions["correct_answer"]))
+              sayHello
+            }
+          /> */}
         </fieldset>
       </form>
     </div>
