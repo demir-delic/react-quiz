@@ -1,29 +1,19 @@
 import React, { useState } from "react"
-import Button from "./Button"
+import QuestionList from "./QuestionList"
 import Question from "./Question"
 import Answer from "./Answer"
+import Button from "./Button"
 import "./App.css"
 
 const App = () => {
-  const tenQuestions = () => {
-    fetch("https://opentdb.com/api.php?amount=1&category=18&difficulty=easy&type=multiple")
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-  }
-
-  tenQuestions()
-
   return (
     <div className="App">
-      <form>
-        <fieldset>
-          <Question></Question>
-          <Answer></Answer>
-          <Answer></Answer>
-          <Answer></Answer>
-          <Button className="btn"></Button>
-        </fieldset>
-      </form>
+      <QuestionList />
+      {/* <Question /> */}
+      {/* <Answer /> */}
+      {/* <Answer /> */}
+      {/* <Answer /> */}
+      {/* <Button className="btn" /> */}
     </div>
   )
 }
